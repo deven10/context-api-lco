@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import  React, { useState } from 'react';
 import './App.css';
 
+const GrandChild = (props) => {
+  return (
+    <div>
+      <h1>Grand Child: </h1>
+      <Child brand={props.brand}/>
+    </div>
+  )
+}
+
+const Child = (props) => {
+  return (
+   <h2>Child : {props.brand}</h2>
+  )
+}
+
 function App() {
+
+  const [brandname] = useState("Deven");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello</h1>
+      {/* <Child brand={brandname}/> */}
+      <GrandChild brand={brandname}/>
     </div>
   );
 }
