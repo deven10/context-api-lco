@@ -1,32 +1,48 @@
-import  React, { useState } from 'react';
-import './App.css';
+import React from "react";
+import Context from "./Component/Context";
+import Provider from "./Component/Provider";
 
-const GrandChild = (props) => {
-  return (
-    <div>
-      <h1>Grand Child: </h1>
-      <Child brand={props.brand}/>
-    </div>
+const Agents = () => {
+  return <AgentOne />
+}
+
+const AgentOne = () => {
+  return <AgentTwo />
+}
+
+const AgentTwo = () => {
+  return <AgentBond />
+}
+
+const AgentBond = () => {
+  return(
+    <>
+      <Context.Consumer>
+        {
+          (context) => (
+            <>
+              <h2>Agent Information</h2>
+              <p>Mission Name: {context.data.mname}</p>
+              <p>Agent ID: {context.data.agentID}</p>
+              <p>Mission Status: {context.data.accept}</p>
+              <button onClick={context.isMissionAccepted}>Accept mission ?</button>
+            </>
+          )
+        }
+      </Context.Consumer>
+    </>
   )
 }
 
-const Child = (props) => {
-  return (
-   <h2>Child : {props.brand}</h2>
+const App = () => {
+  return(
+    <>
+      <h1>Context API</h1>
+      <Provider>
+        <Agents />
+      </Provider>
+    </>
   )
-}
-
-function App() {
-
-  const [brandname] = useState("Deven");
-
-  return (
-    <div className="App">
-      <h1>Hello</h1>
-      {/* <Child brand={brandname}/> */}
-      <GrandChild brand={brandname}/>
-    </div>
-  );
 }
 
 export default App;
